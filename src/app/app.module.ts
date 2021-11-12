@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import { ButtonComponent } from './button/button.component';
 import { TextInputComponent } from './text-input/text-input.component';
 
@@ -25,6 +26,7 @@ import { TextInputComponent } from './text-input/text-input.component';
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
