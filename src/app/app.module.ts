@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { ButtonComponent } from './button/button.component';
 import { TextInputComponent } from './text-input/text-input.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TextInputComponent } from './text-input/text-input.component';
     TaskCardComponent,
     ButtonComponent,
     TextInputComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
