@@ -9,6 +9,7 @@ import { TaskCardComponent } from './task-card/task-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ButtonComponent } from './button/button.component';
+import { TextInputComponent } from './text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ButtonComponent } from './button/button.component';
     HeaderComponent,
     TaskCardComponent,
     ButtonComponent,
+    TextInputComponent,
   ],
   imports: [
     BrowserModule,
