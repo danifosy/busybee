@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { TaskItem } from './../task-list-data-management.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-task-card',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-card.component.scss'],
 })
 export class TaskCardComponent implements OnInit {
+  @Input()
+  taskItem!: TaskItem;
+
   constructor() {}
 
   ngOnInit(): void {}
