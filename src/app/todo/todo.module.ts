@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { TodoRoutingModule } from './todo-routing.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TodoRoutingModule } from './todo-routing.module';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatIconModule,
   ],
 })
 export class TodoModule {}
