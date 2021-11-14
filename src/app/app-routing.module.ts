@@ -1,15 +1,11 @@
-import { HomePageComponent } from './home-page/home-page.component';
-import { TextInputComponent } from './text-input/text-input.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'home', component: HomePageComponent },
   {
-    path: 'add',
-    component: TextInputComponent,
+    path: '',
+    loadChildren: () => import('./todo/todo.module').then((m) => m.TodoModule),
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
