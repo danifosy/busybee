@@ -1,13 +1,19 @@
-<mat-card>
+<mat-card class="taskCard">
   <mat-card-title [class.done]="taskItem.isDone"
     ><span *ngIf="!showEditField; else editBlock">{{
       taskItem.taskValue
     }}</span>
   </mat-card-title>
   <mat-card-actions align="end" *ngIf="!showEditField">
-    <button mat-button (click)="showEditField = true">edit</button>
-    <button mat-button (click)="delete()">delete</button>
-    <button mat-button (click)="complete()">DONE</button>
+    <button mat-button (click)="showEditField = true">
+      <span>edit</span><mat-icon class="icon">edit</mat-icon>
+    </button>
+    <button mat-button (click)="delete()">
+      <span>delete</span><mat-icon class="icon">delete</mat-icon>
+    </button>
+    <button mat-button (click)="complete()">
+      <span>DONE</span><mat-icon class="icon">task_alt</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>
 
