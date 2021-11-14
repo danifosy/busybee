@@ -10,24 +10,15 @@ export type TaskItem = {
   providedIn: 'root',
 })
 export class TaskListDataManagementService {
-  items: TaskItem[] = [
-    {
-      taskValue: 'gassi gehen',
-      taskId: 1,
-      isDone: false,
-    },
-    {
-      taskValue: 'kochen',
-      taskId: 2,
-      isDone: true,
-    },
-  ];
+  items!: TaskItem[];
 
-  constructor() {}
+  constructor() {
+    this.loadFromLocalStorage();
+  }
 
   getNextId(): number {
     const idArray = this.items.map((item) => item.taskId);
-    const maxNumber = Math.max(...idArray);
+    const maxNumber = Math.max(0, ...idArray);
     return maxNumber + 1;
   }
 
@@ -41,6 +32,7 @@ export class TaskListDataManagementService {
     console.log(newItem);
 
     this.items = [newItem, ...this.items];
+    this.safeToLocalStorage();
   }
 
   findPositionbyId(taskId: number) {
@@ -53,12 +45,14 @@ export class TaskListDataManagementService {
     const newItem = { ...oldItem, taskValue };
     this.items[position] = newItem;
     console.log('updated task:', newItem);
+    this.safeToLocalStorage();
   }
 
   deleteTaskItem(taskId: number) {
     const filteredTasks = this.items.filter((item) => item.taskId != taskId);
     this.items.length = 0;
     this.items.push(...filteredTasks);
+    this.safeToLocalStorage();
 
     console.log('delete task with id:', taskId);
   }
@@ -67,9 +61,24 @@ export class TaskListDataManagementService {
     const oldItem = this.items[position];
     const newItem = { ...oldItem, isDone: true };
     this.items[position] = newItem;
+    this.safeToLocalStorage();
+
     console.log('complete task with id:', taskId);
   }
   getTaskItems(): TaskItem[] {
     return this.items;
+  }
+
+  safeToLocalStorage() {
+    localStorage.setItem('data', JSON.stringify(this.items));
+  }
+
+  loadFromLocalStorage() {
+    const jsonString = localStorage.getItem('data');
+    if (jsonString) {
+      this.items = JSON.parse(jsonString);
+    } else {
+      this.items = [];
+    }
   }
 }
