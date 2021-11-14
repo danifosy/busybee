@@ -57,7 +57,8 @@ export class TaskListDataManagementService {
 
   deleteTaskItem(taskId: number) {
     const filteredTasks = this.items.filter((item) => item.taskId != taskId);
-    this.items = filteredTasks;
+    this.items.length = 0;
+    this.items.push(...filteredTasks);
 
     console.log('delete task with id:', taskId);
   }
