@@ -1,10 +1,22 @@
 <mat-card>
   <mat-card-title [class.done]="taskItem.isDone"
-    >{{ taskItem.taskValue }}
+    ><span *ngIf="!showEditField; else editBlock">{{
+      taskItem.taskValue
+    }}</span>
   </mat-card-title>
-  <mat-card-actions align="end">
-    <button mat-button>edit</button>
+  <mat-card-actions align="end" *ngIf="!showEditField">
+    <button mat-button (click)="showEditField = true">edit</button>
     <button mat-button (click)="delete()">delete</button>
     <button mat-button (click)="complete()">DONE</button>
   </mat-card-actions>
 </mat-card>
+
+<ng-template #editBlock
+  ><form class="example-form" (submit)="update(task.value)">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>update task </mat-label>
+      <input matInput [value]="taskItem.taskValue" #task required />
+    </mat-form-field>
+    <button mat-button type="submit">safe</button>
+  </form>
+</ng-template>

@@ -12,8 +12,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TaskCardComponent implements OnInit {
   @Input()
   taskItem!: TaskItem;
-
   service: TaskListDataManagementService;
+  showEditField: boolean = false;
+
   constructor(service: TaskListDataManagementService) {
     this.service = service;
   }
@@ -24,6 +25,12 @@ export class TaskCardComponent implements OnInit {
 
   complete() {
     this.service.closeTaskItem(this.taskItem.taskId);
+  }
+
+  update(taskValue: string): boolean {
+    this.service.updateTaskItem(this.taskItem.taskId, taskValue);
+    this.showEditField = false;
+    return false;
   }
 
   ngOnInit(): void {}
