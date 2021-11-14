@@ -1,8 +1,10 @@
 <mat-card>
-  <mat-card-title>{{ taskItem.taskValue }}</mat-card-title>
+  <mat-card-title [class.done]="taskItem.isDone"
+    >{{ taskItem.taskValue }}
+  </mat-card-title>
   <mat-card-actions align="end">
     <button mat-button>edit</button>
-    <button mat-button>delete</button>
-    <button mat-button>DONE</button>
+    <button mat-button (click)="delete()">delete</button>
+    <button mat-button (click)="complete()">DONE</button>
   </mat-card-actions>
 </mat-card>
