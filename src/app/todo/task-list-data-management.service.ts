@@ -16,29 +16,34 @@ export class TaskListDataManagementService {
     this.loadFromLocalStorage();
   }
 
+  /* helper functions */
+
+  // finds the highest id number within the array and adds +1
   getNextId(): number {
     const idArray = this.items.map((item) => item.taskId);
     const maxNumber = Math.max(0, ...idArray);
     return maxNumber + 1;
   }
 
+  // finds position by the index number of id
+  findPositionbyId(taskId: number) {
+    return this.items.findIndex((item) => item.taskId === taskId);
+  }
+
+  // creates new task item, puts it on top and spreads old tasks below and then new array into LS
   addTaskItem(taskValue: string) {
     const newItem: TaskItem = {
       taskValue,
       taskId: this.getNextId(),
       isDone: false,
     };
-
-    console.log(newItem);
-
     this.items = [newItem, ...this.items];
     this.safeToLocalStorage();
   }
 
-  findPositionbyId(taskId: number) {
-    return this.items.findIndex((item) => item.taskId === taskId);
-  }
+  /* update, delete, mark as done  */
 
+  // uses find function to access task by id and updates, saves updated task into LS
   updateTaskItem(taskId: number, taskValue: string) {
     const position = this.findPositionbyId(taskId);
     const oldItem = this.items[position];
@@ -48,6 +53,7 @@ export class TaskListDataManagementService {
     this.safeToLocalStorage();
   }
 
+  // filters tasks and spreads everything that doesn't have filtered id into new array and saves into LS
   deleteTaskItem(taskId: number) {
     const filteredTasks = this.items.filter((item) => item.taskId != taskId);
     this.items.length = 0;
@@ -56,6 +62,8 @@ export class TaskListDataManagementService {
 
     console.log('delete task with id:', taskId);
   }
+
+  // finds position by id, changes done status and saves status into LS
   closeTaskItem(taskId: number) {
     const position = this.findPositionbyId(taskId);
     const oldItem = this.items[position];
@@ -65,9 +73,12 @@ export class TaskListDataManagementService {
 
     console.log('complete task with id:', taskId);
   }
+
   getTaskItems(): TaskItem[] {
     return this.items;
   }
+
+  /* Local Storage */
 
   safeToLocalStorage() {
     localStorage.setItem('data', JSON.stringify(this.items));
